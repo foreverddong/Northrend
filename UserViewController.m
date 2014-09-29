@@ -9,6 +9,9 @@
 #import "UserViewController.h"
 
 @interface UserViewController ()
+{
+    EPClientNetwork *testNet;
+}
 
 @end
 
@@ -16,6 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    testNet = [[EPClientNetwork alloc] init];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -23,5 +27,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(IBAction)startThread:(id)sender
+{
+    [testNet startClientConnection];
+}
 @end

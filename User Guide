@@ -1,0 +1,15 @@
+This is the user guide for Northrend Data Resources
+
+as you can see, there are 2 groups EPNews and EPUser
+
+we use sqlite as our target database
+
+EPNews and EPUser have similar function, so take EPUserDataManager and EPUserManagedObject as Example.
+
+EPUserManagedObject is our object in database. For better understanding, treat one instance of EPUserManagedObject as one record in the database
+
+an user have 3 properties by the time this guide is writing. they are username, password and email,and they are all NSString.
+    so send a message of property name for the object to get the content of the data.
+for example: we have a instance tmpUser
+[tmpUser username]; - this will get you a username with type NSString*
+

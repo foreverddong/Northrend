@@ -16,5 +16,6 @@
 
     NSURL *serverURL;
 }
+-(void)startClientConnection;
 @property NSMutableData *receivedData;
 @end

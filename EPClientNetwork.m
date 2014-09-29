@@ -7,6 +7,7 @@
 //
 
 #import "EPClientNetwork.h"
+#import "UserViewController.h"
 #define do_something
 #define kBufferSize 1024
 @implementation EPClientNetwork
@@ -36,16 +37,19 @@
         _receivedData = [[NSMutableData alloc] init];
     }
     [_receivedData appendData:data];
+    UIStoryboard *mainBoard = [UIStoryboard storyboardWithName:@"Main.storyboard" bundle:nil];
     
     // Update UI
     //
-    //[[NSOperationQueue mainQueue] addOperationWithBlock:^{
-      //  NSString * resultsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        //self.receiveTextView.text = resultsString;
-    }
-
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+       NSString * resultsString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        UserViewController *userView = [mainBoard instantiateViewControllerWithIdentifier:@"UserView"];
+        [[userView resultTextField] setText:resultsString];
+    }];
+}
 #pragma mark NSStreamDelegate
-- (void)loadDataFromServerWithURL:(NSURL *)url
+    
+-(void)loadDataFromServerWithURL:(NSURL *)url
 {
     NSInputStream * readStream;
     [NSStream getStreamsToHostWithName:[url host]

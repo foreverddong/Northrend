@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "EPClientNetwork.h"
 @interface UserViewController : UIViewController
-
+{
+   }
+@property(strong,nonatomic) IBOutlet UITextField *resultTextField;
 
 @end
 
