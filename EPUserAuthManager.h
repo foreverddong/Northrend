@@ -14,5 +14,6 @@
     EPUserDataManager *manager;
     NSMutableArray *allData;
 }
--(BOOL)isUsername:(NSString*)sourceUsername matchesPassword:(NSString*)sourcePassword;
+-(BOOL)selectUserWithName:(NSString*)sourceUsername ifMatchesPassword:(NSString*)sourcePassword;
+-(BOOL)selectUserWithName:(NSString*)sourceUsername;
 @end

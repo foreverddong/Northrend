@@ -10,14 +10,27 @@
 #import "EPUserManagedObject.h"
 @implementation EPUserAuthManager
 
--(id)init
+-(id)initWithDatabase
 {
     manager = [[EPUserDataManager alloc] init];
     allData = [manager getAllObjectFromDatabase];
     self = [super init];
     return self;
 }
--(BOOL)isUsername:(NSString *)sourceUsername matchesPassword:(NSString *)sourcePassword
+-(id)init
+{
+    self = [super init];
+    return self;
+}
+-(id)initWithDatabaseAndUser:(EPUserManagedObject*)sourceUser
+{
+    manager = [[EPUserDataManager alloc] init];
+    allData = [manager getAllObjectFromDatabase];
+    user = sourceUser;
+    self = [super init];
+    return self;
+}
+-(BOOL)selectUserWithName:(NSString *)sourceUsername ifMatchesPassword:(NSString *)sourcePassword
 {
     for (EPUserManagedObject *sourceUser in allData)
     {
@@ -27,13 +40,37 @@
             break;
         }
     }
-    if ([[user password] isEqualToString:sourcePassword])
+    if ([[user password] isEqualToString:sourcePassword] && user != nil)
     {
         return YES;
     }
     else
     {
+        user = nil;
         return NO;
     }
+}
+-(BOOL)selectUserWithName:(NSString*)sourceUsername
+{
+    for (EPUserManagedObject *sourceUser in allData)
+    {
+        if ([[sourceUser username] isEqualToString:sourceUsername])
+        {
+            user = sourceUser;
+            break;
+        }
+    }
+    if (user != nil)
+    {
+    return YES;
+    }
+    else
+    {
+        return NO;
+    }
+}
+-(BOOL)insertUserIntoDatabase
+{
+    return YES;
 }
 @end
